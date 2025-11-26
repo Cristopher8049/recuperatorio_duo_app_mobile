@@ -1,4 +1,4 @@
-package com.example.recuperatorio_app_mobile  // <-- o el paquete real de tu app
+package com.example.recuperatorio_app_mobile
 
 import android.Manifest
 import android.content.Intent
@@ -23,13 +23,17 @@ import com.google.accompanist.permissions.rememberPermissionState
 @Composable
 fun PermissionsScreen() {
 
+    val context = LocalContext.current
+
     val cameraPermission = rememberPermissionState(Manifest.permission.CAMERA)
     val locationPermission =
         rememberPermissionState(Manifest.permission.ACCESS_FINE_LOCATION)
 
     val pendingPermissions = remember { mutableStateListOf<String>() }
-
     val multiplePermissionsState = rememberMultiplePermissionsState(pendingPermissions)
+
+    var cameraRequested by remember { mutableStateOf(false) }
+    var locationRequested by remember { mutableStateOf(false) }
 
     LaunchedEffect(cameraPermission.status, locationPermission.status) {
 
@@ -59,10 +63,54 @@ fun PermissionsScreen() {
         Row(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            Button(onClick = { cameraPermission.launchPermissionRequest() }) {
+            // BOTÓN CAMERA
+            Button(onClick = {
+                when (val status = cameraPermission.status) {
+                    is PermissionStatus.Granted -> {
+                    }
+
+                    is PermissionStatus.Denied -> {
+                        when {
+                            !cameraRequested -> {
+                                cameraRequested = true
+                                cameraPermission.launchPermissionRequest()
+                            }
+                            status.shouldShowRationale -> {
+                                cameraPermission.launchPermissionRequest()
+                            }
+                            else -> {
+                                openAppSettings(context)
+                            }
+                        }
+                    }
+                }
+            }) {
                 Text(text = "CAMERA")
             }
-            Button(onClick = { locationPermission.launchPermissionRequest() }) {
+
+            // BOTÓN LOCATION
+            Button(onClick = {
+                when (val status = locationPermission.status) {
+                    is PermissionStatus.Granted -> {
+                        // Ya tiene permiso de ubicación
+                    }
+
+                    is PermissionStatus.Denied -> {
+                        when {
+                            !locationRequested -> {
+                                locationRequested = true
+                                locationPermission.launchPermissionRequest()
+                            }
+                            status.shouldShowRationale -> {
+                                locationPermission.launchPermissionRequest()
+                            }
+                            else -> {
+                                openAppSettings(context)
+                            }
+                        }
+                    }
+                }
+            }) {
                 Text(text = "LOCATION")
             }
         }
@@ -81,6 +129,15 @@ fun PermissionsScreen() {
                     else pendingPermissions.joinToString()
         )
     }
+}
+
+private fun openAppSettings(context: android.content.Context) {
+    val intent = Intent(
+        Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+    ).apply {
+        data = Uri.fromParts("package", context.packageName, null)
+    }
+    context.startActivity(intent)
 }
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -113,12 +170,7 @@ private fun PermissionStatusText(
                         color = MaterialTheme.colorScheme.primary,
                         textDecoration = TextDecoration.Underline,
                         modifier = Modifier.clickable {
-                            val intent = Intent(
-                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                            ).apply {
-                                data = Uri.fromParts("package", context.packageName, null)
-                            }
-                            context.startActivity(intent)
+                            openAppSettings(context)
                         }
                     )
 
