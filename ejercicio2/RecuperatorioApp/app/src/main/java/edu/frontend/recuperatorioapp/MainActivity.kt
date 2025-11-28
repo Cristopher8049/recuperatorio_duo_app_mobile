@@ -122,3 +122,11 @@ fun PerfilUsuarioScreen(
         }
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun PerfilPreview() {
+    RecuperatorioAppTheme {
+        PerfilUsuarioScreen()
+    }
+}
