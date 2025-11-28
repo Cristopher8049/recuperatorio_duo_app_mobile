@@ -58,6 +58,67 @@ fun PerfilUsuarioScreen(
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(20.dp)
-        )
+        ) {
+
+            Column(
+                modifier = Modifier.padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "Avatar",
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(100.dp)
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text("Matias Palacios", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+                Text("Mobile Developer", fontSize = 15.sp, color = Color.Gray)
+
+                Spacer(modifier = Modifier.height(28.dp))
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.Email, contentDescription = null)
+                    Spacer(Modifier.width(12.dp))
+                    Column {
+                        Text("Correo Electrónico", fontSize = 12.sp, color = Color.Gray)
+                        Text("matias.palacios@example.com", fontSize = 14.sp)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.Person, contentDescription = null)
+                    Spacer(Modifier.width(12.dp))
+                    Column {
+                        Text("Edad", fontSize = 12.sp, color = Color.Gray)
+                        Text("23 años", fontSize = 14.sp)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.Person, contentDescription = null)
+                    Spacer(Modifier.width(12.dp))
+                    Column {
+                        Text("Puesto", fontSize = 12.sp, color = Color.Gray)
+                        Text("Mobile Developer", fontSize = 14.sp)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(28.dp))
+
+                Button(
+                    onClick = onEditClick,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Editar Perfil")
+                }
+            }
+        }
     }
 }
