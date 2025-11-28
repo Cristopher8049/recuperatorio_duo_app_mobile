@@ -102,14 +102,91 @@ fun PerfilUsuarioScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text(
-                text = "Ana García",
-                fontSize = 35.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.Black
-            )
+            Text(text = "Ana García", fontSize = 35.sp, fontWeight = FontWeight.Bold, color = Color.Black)
             Text(text = "Mobile Developer", fontSize = 20.sp, color = Color.Gray)
 
             Spacer(modifier = Modifier.height(180.dp))
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFF5F5F5)),
+                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            ) {
+                Column(
+                    modifier = Modifier.padding(24.dp),
+                    horizontalAlignment = Alignment.Start
+                ) {
+
+                    // 1. Título Correo
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Email, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(20.dp))
+                        Spacer(Modifier.width(12.dp))
+                        Text("Correo Electrónico", fontSize = 14.sp, color = Color.Gray)
+                    }
+
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 12.dp),
+                        thickness = 1.dp,
+                        color = Color(0xFFE0E0E0)
+                    )
+
+                    // 2. El Correo
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Info, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(20.dp))
+                        Spacer(Modifier.width(12.dp))
+                        Text("ana.garcia@example.com", fontSize = 16.sp, fontWeight = FontWeight.Medium)
+                    }
+
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 12.dp),
+                        thickness = 1.dp,
+                        color = Color(0xFFE0E0E0)
+                    )
+
+                    // 3. Edad
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.DateRange, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(20.dp))
+                        Spacer(Modifier.width(12.dp))
+                        Column {
+                            Text("Edad 30 años", fontSize = 16.sp, color = Color.DarkGray)
+                        }
+                    }
+
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 12.dp),
+                        thickness = 1.dp,
+                        color = Color(0xFFE0E0E0)
+                    )
+
+                    // 4. Puesto
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Person, contentDescription = null, tint = Color.Gray, modifier = Modifier.size(20.dp))
+                        Spacer(Modifier.width(12.dp))
+                        Column {
+                            Text("Mobile Developer", fontSize = 16.sp, color = Color.DarkGray, fontWeight = FontWeight.Medium)
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(32.dp))
+
+                    // Botón
+                    Button(
+                        onClick = onEditClick,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(50.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF666666)
+                        )
+                    ) {
+                        Text("Editar Perfil", color = Color.White, fontSize = 16.sp)
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
+}
