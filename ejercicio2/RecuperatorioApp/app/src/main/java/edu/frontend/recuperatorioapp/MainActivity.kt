@@ -82,6 +82,34 @@ fun PerfilUsuarioScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // --- AVATAR Y NOMBRE ---
+            Box(
+                modifier = Modifier
+                    .size(150.dp)
+                    .clip(CircleShape)
+                    .background(Color(0xFF666666)),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = "Foto de perfil",
+                    tint = Color.White,
+                    modifier = Modifier.size(60.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "Ana García",
+                fontSize = 35.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+            Text(text = "Mobile Developer", fontSize = 20.sp, color = Color.Gray)
+
+            Spacer(modifier = Modifier.height(180.dp))
         }
     }
-}
