@@ -41,4 +41,23 @@ class MainActivity : ComponentActivity() {
 fun PerfilUsuarioScreen(
     modifier: Modifier = Modifier,
     onEditClick: () -> Unit = {}
-)
+) {
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+
+        Text(
+            text = "Perfil de Usuario",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(20.dp)
+        )
+    }
+}
