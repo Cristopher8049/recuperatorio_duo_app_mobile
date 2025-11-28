@@ -37,3 +37,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Composable
+fun PerfilUsuarioScreen(
+    modifier: Modifier = Modifier,
+    onEditClick: () -> Unit = {}
+)
